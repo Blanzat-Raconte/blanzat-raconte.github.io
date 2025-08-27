@@ -1,0 +1,127 @@
+4:
+    nb: 4
+    name: ANGÉLIQUE OFFICINALE
+    latin: Angelica archangelica
+    desc: Je suis une belle plante bisannuelle de 1 m à 2,5 m avec des fleurs groupées en vastes ombelles composées, vert jaunâtre, de 10 à 30 cm de diamètre.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+12:
+    nb: 12
+    name: COGNASSIER VRANJA
+    latin: Cydonia vulgaris
+    desc: Les Grecs m’appelaient «Poire de Cydonie». Mes coings (200 à 800 g), sont transformés en gelées, confitures, pâtes de fruits ou gâteaux.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+14:
+    nb: 14
+    name: FRAISIERS ALLEGRO, FALCO, KORONA ET SONSATION
+    latin: Fragaria
+    desc: Petit fruit rouge consommé nature, sucré, à la chantilly, au chocolat, ou comme confiture, tarte, glace, coulis, pâtes de fruits ou fruits confits …
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+15:
+    nb: 15
+    name: FRAMBOISIERS FALL GOLD ET HÉRITAGE
+    latin: Rubus idaeus
+    desc: Petit arbuste, mes fruits à petites graines se consomment tels quels, mais aussi en confitures, pâtes de fruits, fruits secs, coulis, patisserie... et en vinaigre.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+18:
+    nb: 18
+    name: GUIMAUVE OFFICINALE
+    latin: Althaea officinalis
+    desc: On m’appelle aussi Marsh Mallow. Mes racines donnaient le moelleux au bonbon «guimauve». Elles sont parfois utilisées pour calmer les douleurs dentaires des enfants.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+20:
+    nb: 20
+    name: LAVANDE OFFICINALE
+    latin: Lavandula angustifolia
+    desc: Je suis une plante mellifère vivace à fleurs mauves très parfumée. Je suis utilisée pour parfumer le linge.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+22:
+    nb: 22
+    name: MENTHES
+    latin: Mentha spicata
+    desc: Nous donnons toutes sortes de bonbons (Pastilles de Vichy) ou boissons rafraîchissantes et infusions digestives. Une nymphe des eaux douces nous a donné notre nom.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+24:
+    nb: 24
+    name: MÛRIER DIRKSEN THORNLESS
+    latin: Rubus laciniatus
+    desc: À l’origine, je suis une ronce des bords des chemins. Ici, je suis sans épine et donne des fruits noirs pour les confitures.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+27:
+    nb: 27
+    name: RÉGLISSE
+    latin: Glycyrrhiza glabra
+    desc: Élixir de longue vie pour la médecine traditionnelle chinoise et selon Hippocrate, ma racine a un goût caractéristique, doux et amer, apprécié en rouleau.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+28: 
+    nb: 28
+    name: RHUBARBE VICTORIA
+    latin: Rheum rhabarbarum
+    desc: Plante aux côtes rouges et à la saveur acidulée utilisées comme fruit dans compotes ou tartes. Mon nom signifie « racine barbare ».
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+29: 
+    nb: 29
+    name: ROMARIN OFFICINAL
+    latin: Rosmarinus officinalis
+    desc: Je suis un arbrisseau aromatique aux multiples vertus. Mon nom signifie « rosée de la mer ». Mon miel stimule le foie.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+32:
+    nb: 32
+    name: NIGELLE DE DAMAS
+    latin: Tagetes lemmonii
+    desc: Je suis une plante décorative appelée Cheveux-de-Vénus, Barbe-de-Capucin, Diable-dans-le-buisson ou Belle-aux-cheveux-dénoués.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+33:
+    nb: 33
+    name: VIOLETTE ODORANTE CENDRILLON
+    latin: Viola odorata
+    desc: Mes feuilles sont consommées crues en salades ou cuites dans des soupes. Mes fleurs fraîches ou cristallisées décorent les pâtisseries.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+35:
+    nb: 35
+    name: CASSIS
+    latin: Ribes nigrum
+    desc: Je suis un arbrisseau à baies noires aromatiques, consommées telles quelles ou en jus, sirops, gelées, ou pâtes de fruits. Je possède de grandes propriétés médicinales.
+    img_credit: 
+    pictos: [mel,bon,med,com]
+
+36:
+    nb: 36
+    name: CEP DE VIGNE CLINTON
+    latin: Vitis riparia x Vitis labrusca
+    desc: Mes raisins très noirs ont une peau épaisse au goût atypique de framboise. Ils ne peuvent pas être vinifiés, mais sont utilisés pour des gourmandises.
+    img_credit: Gabriel Cabrol
+    pictos: [mel,bon,med,com]
+
+38:
+    nb: 
+    name: VERVEINE ODORANTE
+    latin: Aloysia citrodora
+    desc: Je suis beaucoup utilisée en tisane. Au Puy- en-Velay (43) on me connaît surtout pour ma liqueur digestive, mais j’y suis aussi transformée en bonbons.
+    img_credit: Isabelle Papet
+    pictos: [mel,bon,med,com]
