@@ -15,6 +15,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     text-align: center;
+    width: 80%;
   }
 
   button {
@@ -27,7 +28,7 @@
     cursor: pointer;
     font-size: 16px;
     transition: background 0.2s;
-    width: 120px;
+    min-width: 120px;
   }
 
   button:hover {
@@ -45,7 +46,8 @@
   }
 
   #track-info img {
-    max-width: 250px;
+    /*max-width: 250px;*/
+    width: 80%;
     border-radius: 10px;
     margin-top: 10px;
     display: inline-block;
@@ -108,6 +110,12 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
     // Met à jour le texte du bouton Play/Pause
     document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+    
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+      audio.currentTime = 0; // remet à zéro par sécurité
+    });
   }
 
   // Bouton Play / Pause
@@ -202,7 +210,8 @@ scanButton.addEventListener("click", async () => {
       log(`> Records: (${message.records.length})`);
       if (serialNumber == 'f2:09:52:73')
         launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
-      
+      if (serialNumber == '54:5c:aa:89')
+        launch('https://blanzat-raconte.github.io/audio/11.mp3', 'Réglisse et Agastache', 'https://blanzat-raconte.github.io/assets/img/pates_de_fruits.png', 'petite fleur');
     });
   } catch (error) {
     log("Argh! " + error);
