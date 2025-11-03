@@ -183,7 +183,6 @@ window.addEventListener('error', function(error) {
 log = ChromeSamples.log;
 if (!("NDEFReader" in window)){
   ChromeSamples.setStatus("Cette page ne fonctionnera pas. Il faut utiliser le navigateur Chrome sur un téléphone Android pour que cela fonctionne.");
-  launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
   }
   
 scanButton.addEventListener("click", async () => {
@@ -201,6 +200,9 @@ scanButton.addEventListener("click", async () => {
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
       log(`> Serial Number: ${serialNumber}`);
       log(`> Records: (${message.records.length})`);
+      if (serialNumber == 'f2:09:52:73')
+        launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
+      
     });
   } catch (error) {
     log("Argh! " + error);
