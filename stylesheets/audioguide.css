@@ -1,0 +1,44 @@
+.player {
+  display: inline-block;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 80%;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+  min-width: 120px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#track-info {
+  margin-top: 20px;
+}
+
+#track-info img {
+  /*max-width: 250px;*/
+  width: 80%;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: inline-block;
+}

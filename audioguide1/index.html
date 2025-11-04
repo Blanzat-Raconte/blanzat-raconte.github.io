@@ -14,12 +14,14 @@
         <link rel="prev" href="../jardin_plus.html">
       
       
+        <link rel="next" href="../audioguide2/index.html">
+      
       <link rel="icon" href="../assets/logo/blanzat-raconte.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.21">
     
     
       
-        <title>Audioguide - Blanzat Raconte moi une histoire</title>
+        <title>Audioguide 1 - Blanzat Raconte moi une histoire</title>
       
     
     
@@ -43,6 +45,8 @@
     
     
       <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/audioguide.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -98,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Audioguide
+              Audioguide 1
             
           </span>
         </div>
@@ -253,9 +257,24 @@
       
       
       <a href="index.html" class="md-nav__link md-nav__link--active">
-        Audioguide
+        Audioguide 1
       </a>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audioguide2/index.html" class="md-nav__link">
+        Audioguide 2
+      </a>
     </li>
   
 
@@ -291,54 +310,7 @@
                   
 
 
-  <h1>Audioguide</h1>
-
-<style>
-  .player {
-    display: inline-block;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    text-align: center;
-    width: 80%;
-  }
-
-  button {
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 16px;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s;
-    min-width: 120px;
-  }
-
-  button:hover {
-    background: #0056b3;
-  }
-
-  button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  #track-info {
-    margin-top: 20px;
-  }
-
-  #track-info img {
-    /*max-width: 250px;*/
-    width: 80%;
-    border-radius: 10px;
-    margin-top: 10px;
-    display: inline-block;
-  }
-   </style>
+  <h1>Audioguide 1</h1>
 
 <div id="status"></div>
 <h2>Comment faire ?</h2>
@@ -352,10 +324,9 @@ Touchez le haut de ces poteaux avec le téléphone pour écouter un message sur 
 <p>
 Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 </p>
-<!--
-<div>
-<button id="scanButton">Scan</button>
-</div>-->
+
+<video id="qr-video"></video>
+<div id="result">En attente du QR code...</div>
 
 <div class="player">
   <button id="playPauseBtn">▶️ Play</button>
@@ -424,84 +395,36 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
 </script>
 
-<script>
-var ChromeSamples = {
-  log: function() {
-    var line = Array.prototype.slice.call(arguments).map(function(argument) {
-      return typeof argument === 'string' ? argument : JSON.stringify(argument);
-    }).join(' ');
+<script type="module">
+    import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
 
-    document.querySelector('#log').textContent += line + '\n';
-  },
+    const video = document.getElementById('qr-video');
+    const resultEl = document.getElementById('result');
 
-  clearLog: function() {
-    document.querySelector('#log').textContent = '';
-  },
+    // Créer le scanner
+    const scanner = new QrScanner(
+      video, result => {
+        const url = result.data;
+        if (url.startsWith("https://blanzat-raconte.github.io/audio/")){
+//             console.log("go", url);
+//             resultEl.textContent = url;
+            launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
+        }
+      },
+      {
+        preferredCamera: 'environment', // caméra arrière sur mobile
+      }
+    );
 
-  setStatus: function(status) {
-    document.querySelector('#status').textContent = status;
-  }
-};
-</script>
-
-<h3>Infos</h3>
-<div id="output" class="output">
-  <div id="status"></div>
-  <pre id="log"></pre>
-</div>
-
-<script>
-if (/Chrome\/(\d+\.\d+.\d+.\d+)/.test(navigator.userAgent)){
-// Let's log a warning if the sample is not supposed to execute on this
-// version of Chrome.
-if (89 > parseInt(RegExp.$1)) {
-  ChromeSamples.setStatus('Warning! Keep in mind this sample has been tested with Chrome ' + 89 + '.');
-  }
-}
-// Add a global error event listener early on in the page load, to help ensure that browsers
-// which don't support specific functionality still end up displaying a meaningful message.
-window.addEventListener('error', function(error) {
-  if (ChromeSamples && ChromeSamples.setStatus) {
-    console.error(error);
-    ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-    error.preventDefault();
-  }
-});
-</script>
-
-<script>
-log = ChromeSamples.log;
-if (!("NDEFReader" in window)){
-  ChromeSamples.setStatus("Cette page ne fonctionnera pas. Il faut utiliser le navigateur Chrome sur un téléphone Android pour que cela fonctionne.");
-  }
-
-async function startScan() {
-  log("starting scan");
-
-  try {
-    const ndef = new NDEFReader();
-    await ndef.scan();
-    log("> Scan started");
-
-    ndef.addEventListener("readingerror", () => {
-      log("Argh! Cannot read data from the NFC tag. Try another one?");
+    // Vérifie qu'une caméra existe avant de démarrer
+    QrScanner.hasCamera().then(hasCamera => {
+      if (hasCamera) {
+        scanner.start();
+      } else {
+        resultEl.textContent = "Aucune caméra détectée.";
+      }
     });
-
-    ndef.addEventListener("reading", ({ message, serialNumber }) => {
-      log(`> Serial Number: ${serialNumber}`);
-      log(`> Records: (${message.records.length})`);
-      if (serialNumber == 'f2:09:52:73')
-        launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
-      if (serialNumber == '54:5c:aa:89')
-        launch('https://blanzat-raconte.github.io/audio/11.mp3', 'Réglisse et Agastache', 'https://blanzat-raconte.github.io/assets/img/pates_de_fruits.png', 'petite fleur');
-    });
-  } catch (error) {
-    log("Argh! " + error);
-  }
-}
-startScan();
-
-</script>
+  </script>
 
 
 

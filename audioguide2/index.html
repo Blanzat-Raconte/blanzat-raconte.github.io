@@ -11,13 +11,15 @@
       
       
       
+        <link rel="prev" href="../audioguide1/index.html">
+      
       
       <link rel="icon" href="../assets/logo/blanzat-raconte.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.21">
     
     
       
-        <title>0.mp3 - Blanzat Raconte moi une histoire</title>
+        <title>Audioguide 2 - Blanzat Raconte moi une histoire</title>
       
     
     
@@ -68,11 +70,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#0mp3" class="md-skip">
-          Aller au contenu
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0.mp3
+              Audioguide 2
             
           </span>
         </div>
@@ -263,11 +260,19 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../audioguide2/index.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="index.html" class="md-nav__link md-nav__link--active">
         Audioguide 2
       </a>
+      
     </li>
   
 
@@ -289,8 +294,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -305,27 +308,166 @@
                   
 
 
-<h1 id="0mp3">0.mp3</h1>
-<p>2 3 4 5 
-Angélique officinale</p>
-<h1 id="_1"></h1>
-<p>12 30
-Cognassier Vranja ; Sauge officinale</p>
-<h1 id="_2"></h1>
-<p>33 35
-Violette odorante ; Cassis</p>
-<h1 id="_3"></h1>
-<p>15 38 11
-Camomille matricaire ; Verveine odorante ; Frambroisiers</p>
-<h1 id="_4"></h1>
-<p>21 24
-Mélisse citronnelle ; Mûrier Dirksen Thornless</p>
-<h1 id="11mp3-fin-avant-arbres">11.mp3 (fin avant arbres)</h1>
-<p>7 27
-Réglisse ; Agastache Fenouil</p>
-<h1 id="12mp3-dernier">12.mp3 (dernier)</h1>
-<p>39 40
-Mirabelle ; Prunier Reine-Claude</p>
+  <h1>Audioguide 2</h1>
+
+<div id="status"></div>
+<h2>Comment faire ?</h2>
+<p>
+Il y a des poteaux en bois le long du chemin du jardin. Les poteaux sont reliés par une petite corde.
+Certains poteaux ont un petit chapeau en plastique.
+</p>
+<p>
+Touchez le haut de ces poteaux avec le téléphone pour écouter un message sur les plantes qui sont proches.
+</p>
+<p>
+Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
+</p>
+
+<div class="player">
+  <button id="playPauseBtn">▶️ Play</button>
+  <button id="restartBtn">🔄 Rejouer</button>
+
+  <div id="track-info">
+    <h3 id="title"></h3>
+    <img id="cover" src="" alt="">
+  </div>
+</div>
+
+<script>
+  let audio = null;
+  let isPlaying = false;
+
+  function launch(audioFile, title, imageUrl, imageAlt) {
+    // Si un son est déjà en cours, on l'arrête
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    // Crée un nouvel objet Audio
+    audio = new Audio(audioFile);
+    audio.play();
+    isPlaying = true;
+
+    // Met à jour les infos affichées
+    document.getElementById('title').textContent = title;
+    const cover = document.getElementById('cover');
+    cover.src = imageUrl;
+    cover.alt = imageAlt;
+    cover.style.display = "inline-block";
+
+    // Met à jour le texte du bouton Play/Pause
+    document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+      audio.currentTime = 0; // remet à zéro par sécurité
+    });
+  }
+
+  // Bouton Play / Pause
+  document.getElementById('playPauseBtn').addEventListener('click', () => {
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+    } else {
+      audio.play();
+      document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+    }
+    isPlaying = !isPlaying;
+  });
+
+  // Bouton Restart
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    isPlaying = true;
+    document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+  });
+
+</script>
+
+<script>
+var ChromeSamples = {
+  log: function() {
+    var line = Array.prototype.slice.call(arguments).map(function(argument) {
+      return typeof argument === 'string' ? argument : JSON.stringify(argument);
+    }).join(' ');
+
+    document.querySelector('#log').textContent += line + '\n';
+  },
+
+  clearLog: function() {
+    document.querySelector('#log').textContent = '';
+  },
+
+  setStatus: function(status) {
+    document.querySelector('#status').textContent = status;
+  }
+};
+</script>
+
+<h3>Infos</h3>
+<div id="output" class="output">
+  <div id="status"></div>
+  <pre id="log"></pre>
+</div>
+
+<script>
+if (/Chrome\/(\d+\.\d+.\d+.\d+)/.test(navigator.userAgent)){
+// Let's log a warning if the sample is not supposed to execute on this
+// version of Chrome.
+if (89 > parseInt(RegExp.$1)) {
+  ChromeSamples.setStatus('Warning! Keep in mind this sample has been tested with Chrome ' + 89 + '.');
+  }
+}
+// Add a global error event listener early on in the page load, to help ensure that browsers
+// which don't support specific functionality still end up displaying a meaningful message.
+window.addEventListener('error', function(error) {
+  if (ChromeSamples && ChromeSamples.setStatus) {
+    console.error(error);
+    ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+    error.preventDefault();
+  }
+});
+</script>
+
+<script>
+log = ChromeSamples.log;
+if (!("NDEFReader" in window)){
+  ChromeSamples.setStatus("Cette page ne fonctionnera pas. Il faut utiliser le navigateur Chrome sur un téléphone Android pour que cela fonctionne.");
+  }
+
+async function startScan() {
+  log("starting scan");
+
+  try {
+    const ndef = new NDEFReader();
+    await ndef.scan();
+    log("> Scan started");
+
+    ndef.addEventListener("readingerror", () => {
+      log("Argh! Cannot read data from the NFC tag. Try another one?");
+    });
+
+    ndef.addEventListener("reading", ({ message, serialNumber }) => {
+      log(`> Serial Number: ${serialNumber}`);
+      log(`> Records: (${message.records.length})`);
+      if (serialNumber == 'f2:09:52:73')
+        launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
+      if (serialNumber == '54:5c:aa:89')
+        launch('https://blanzat-raconte.github.io/audio/11.mp3', 'Réglisse et Agastache', 'https://blanzat-raconte.github.io/assets/img/pates_de_fruits.png', 'petite fleur');
+    });
+  } catch (error) {
+    log("Argh! " + error);
+  }
+}
+startScan();
+
+</script>
 
 
 
