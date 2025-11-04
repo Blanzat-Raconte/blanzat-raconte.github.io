@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture QR Code (qr-scanner)</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 20px; }
+    video { width: 100%; max-width: 400px; border-radius: 10px; }
+    #result { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Scanner un QR Code</h2>
+  <video id="qr-video"></video>
+  <div id="result">En attente du QR code...</div>
+
+  <script type="module">
+    import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
+
+    const video = document.getElementById('qr-video');
+    const resultEl = document.getElementById('result');
+
+    // Créer le scanner
+    const scanner = new QrScanner(
+      video,
+      result => {
+//         resultEl.textContent = 'QR détecté : ' + result.data;
+//         console.log('QR détecté :', result);
+        // scanner.stop(); // décommenter pour arrêter après détection
+        const url = result.data;
+        if (url.startsWith("https://blanzat-raconte.github.io/audio/")){
+            console.log("go", url);
+            resultEl.textContent = url;
+        }
+      },
+      {
+        preferredCamera: 'environment', // caméra arrière sur mobile
+      }
+    );
+
+    // Vérifie qu'une caméra existe avant de démarrer
+    QrScanner.hasCamera().then(hasCamera => {
+      if (hasCamera) {
+        scanner.start();
+      } else {
+        resultEl.textContent = "Aucune caméra détectée.";
+      }
+    });
+  </script>
+</body>
+</html>
+ 
