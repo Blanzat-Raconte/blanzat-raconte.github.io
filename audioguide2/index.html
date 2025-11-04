@@ -324,8 +324,8 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 </p>
 
 <div class="player">
-  <button id="playPauseBtn">▶️ Play</button>
-  <button id="restartBtn">🔄 Rejouer</button>
+  <button id="playPauseBtn" disabled="true">▶️ Play</button>
+  <button id="restartBtn" disabled="true">🔄 Rejouer</button>
 
   <div id="track-info">
     <h3 id="title"></h3>
@@ -335,12 +335,20 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
 <script>
   let audio = null;
+  let url = null;
   let isPlaying = false;
   const playPauseBtn = document.getElementById('playPauseBtn');
   const restartBtn = document.getElementById('restartBtn');
   const cover = document.getElementById('cover');
 
   function launch(audioFile, title, imageUrl, imageAlt) {
+    // Si même fichier ou temps de lecture < 3 secondes
+    if (audioFile == url && isPlaying && audio.currentTime < 3)
+        return;
+
+    // Backup du nom de l'audio
+    url = audioFile;
+
     // Si un son est déjà en cours, on l'arrête
     if (audio) {
       audio.pause();

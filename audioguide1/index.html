@@ -341,12 +341,20 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
 <script>
   let audio = null;
+  let url = null;
   let isPlaying = false;
   const playPauseBtn = document.getElementById('playPauseBtn');
   const restartBtn = document.getElementById('restartBtn');
   const cover = document.getElementById('cover');
 
   function launch(audioFile, title, imageUrl, imageAlt) {
+    // Si même fichier ou temps de lecture < 3 secondes
+    if (audioFile == url && isPlaying && audio.currentTime < 3)
+        return;
+
+    // Backup du nom de l'audio
+    url = audioFile;
+
     // Si un son est déjà en cours, on l'arrête
     if (audio) {
       audio.pause();
@@ -417,7 +425,7 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
         if (url.startsWith("https://blanzat-raconte.github.io/audio/")){
 //             console.log("go", url);
 //             resultEl.textContent = url;
-            launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
+            launch(url, 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
         }
       },
       {
