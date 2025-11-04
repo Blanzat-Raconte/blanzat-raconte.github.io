@@ -326,11 +326,10 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 </p>
 
 <video id="qr-video"></video>
-<div id="result">En attente du QR code...</div>
 
 <div class="player">
-  <button id="playPauseBtn">▶️ Play</button>
-  <button id="restartBtn">🔄 Rejouer</button>
+  <button id="playPauseBtn" disabled="true">▶️ Play</button>
+  <button id="restartBtn" disabled="true">🔄 Rejouer</button>
 
   <div id="track-info">
     <h3 id="title"></h3>
@@ -338,9 +337,14 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
   </div>
 </div>
 
+<div id="result">En attente du QR code...</div>
+
 <script>
   let audio = null;
   let isPlaying = false;
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const restartBtn = document.getElementById('restartBtn');
+  const cover = document.getElementById('cover');
 
   function launch(audioFile, title, imageUrl, imageAlt) {
     // Si un son est déjà en cours, on l'arrête
@@ -356,46 +360,51 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
     // Met à jour les infos affichées
     document.getElementById('title').textContent = title;
-    const cover = document.getElementById('cover');
+
     cover.src = imageUrl;
     cover.alt = imageAlt;
     cover.style.display = "inline-block";
 
     // Met à jour le texte du bouton Play/Pause
-    document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+    playPauseBtn.textContent = "⏸️ Pause";
+
+    // Active les boutons
+    playPauseBtn.disabled = false;
+    restartBtn.disabled = false;
 
     audio.addEventListener('ended', () => {
       isPlaying = false;
-      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+      playPauseBtn.textContent = "▶️ Play";
       audio.currentTime = 0; // remet à zéro par sécurité
     });
   }
 
   // Bouton Play / Pause
-  document.getElementById('playPauseBtn').addEventListener('click', () => {
+  playPauseBtn.addEventListener('click', () => {
     if (!audio) return;
     if (isPlaying) {
       audio.pause();
-      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+      playPauseBtn.textContent = "▶️ Play";
     } else {
       audio.play();
-      document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+      playPauseBtn.textContent = "⏸️ Pause";
     }
     isPlaying = !isPlaying;
   });
 
   // Bouton Restart
-  document.getElementById('restartBtn').addEventListener('click', () => {
+  restartBtn.addEventListener('click', () => {
     if (!audio) return;
     audio.currentTime = 0;
     audio.play();
     isPlaying = true;
-    document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+    playPauseBtn.textContent = "⏸️ Pause";
   });
 
 </script>
 
 <script type="module">
+  console.log("huhu");
     import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
 
     const video = document.getElementById('qr-video');

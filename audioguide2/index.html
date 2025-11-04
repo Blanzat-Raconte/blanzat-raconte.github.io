@@ -336,6 +336,9 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 <script>
   let audio = null;
   let isPlaying = false;
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const restartBtn = document.getElementById('restartBtn');
+  const cover = document.getElementById('cover');
 
   function launch(audioFile, title, imageUrl, imageAlt) {
     // Si un son est déjà en cours, on l'arrête
@@ -351,41 +354,45 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
     // Met à jour les infos affichées
     document.getElementById('title').textContent = title;
-    const cover = document.getElementById('cover');
+
     cover.src = imageUrl;
     cover.alt = imageAlt;
     cover.style.display = "inline-block";
 
     // Met à jour le texte du bouton Play/Pause
-    document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+    playPauseBtn.textContent = "⏸️ Pause";
+
+    // Active les boutons
+    playPauseBtn.disabled = false;
+    restartBtn.disabled = false;
 
     audio.addEventListener('ended', () => {
       isPlaying = false;
-      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+      playPauseBtn.textContent = "▶️ Play";
       audio.currentTime = 0; // remet à zéro par sécurité
     });
   }
 
   // Bouton Play / Pause
-  document.getElementById('playPauseBtn').addEventListener('click', () => {
+  playPauseBtn.addEventListener('click', () => {
     if (!audio) return;
     if (isPlaying) {
       audio.pause();
-      document.getElementById('playPauseBtn').textContent = "▶️ Play";
+      playPauseBtn.textContent = "▶️ Play";
     } else {
       audio.play();
-      document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+      playPauseBtn.textContent = "⏸️ Pause";
     }
     isPlaying = !isPlaying;
   });
 
   // Bouton Restart
-  document.getElementById('restartBtn').addEventListener('click', () => {
+  restartBtn.addEventListener('click', () => {
     if (!audio) return;
     audio.currentTime = 0;
     audio.play();
     isPlaying = true;
-    document.getElementById('playPauseBtn').textContent = "⏸️ Pause";
+    playPauseBtn.textContent = "⏸️ Pause";
   });
 
 </script>
