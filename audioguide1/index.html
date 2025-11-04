@@ -21,7 +21,7 @@
     
     
       
-        <title>Audioguide 1 - Blanzat Raconte moi une histoire</title>
+        <title>Audioguide 1 (QRcode) - Blanzat Raconte moi une histoire</title>
       
     
     
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Audioguide 1
+              Audioguide 1 (QRcode)
             
           </span>
         </div>
@@ -257,7 +257,7 @@
       
       
       <a href="index.html" class="md-nav__link md-nav__link--active">
-        Audioguide 1
+        Audioguide 1 (QRcode)
       </a>
       
     </li>
@@ -273,7 +273,7 @@
   
     <li class="md-nav__item">
       <a href="../audioguide2/index.html" class="md-nav__link">
-        Audioguide 2
+        Audioguide 2 (tag NFC)
       </a>
     </li>
   
@@ -310,16 +310,16 @@
                   
 
 
-  <h1>Audioguide 1</h1>
+  <h1>Audioguide 1 (QRcode)</h1>
 
 <div id="status"></div>
 <h2>Comment faire ?</h2>
 <p>
 Il y a des poteaux en bois le long du chemin du jardin. Les poteaux sont reliés par une petite corde.
-Certains poteaux ont un petit chapeau en plastique.
+Certains poteaux ont un petit chapeau en plastique et un "QR-code".
 </p>
 <p>
-Touchez le haut de ces poteaux avec le téléphone pour écouter un message sur les plantes qui sont proches.
+<strong>Mettez votre téléphone au-dessus d'un "QR-code" pour écouter un message sur les plantes qui sont proches.</strong>
 </p>
 <p>
 Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
@@ -411,37 +411,69 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
 </script>
 
+<script>
+async function checkCameraPermission() {
+  if (!navigator.permissions) {
+    console.log("L'API Permissions n'est pas supportée dans ce navigateur.");
+    return;
+  }
+  try {
+    const status = await navigator.permissions.query({ name: 'camera' });
+    console.log('État :', status.state); // "granted" | "denied" | "prompt"
+
+    if (status.state === 'granted') {
+      console.log("✅ L'accès à la caméra est déjà autorisé.");
+      document.querySelector('#status').textContent = "";
+    } else {
+      document.querySelector('#status').textContent = "❌ Vous devez autoriser l'accès la caméra du téléphone pour prendre les QR-codes en photo";
+    }
+    status.onchange = () => {
+      if (status.state === 'granted') {
+        console.log("✅ L'accès à la caméra est déjà autorisé.");
+        document.querySelector('#status').textContent = "";
+      } else {
+        document.querySelector('#status').textContent = "❌ Vous devez autoriser l'accès la caméra du téléphone pour prendre les QR-codes en photo";
+      }
+    }
+
+  } catch (err) {
+    console.error('Erreur lors de la vérification :', err);
+  }
+}
+
+checkCameraPermission();
+</script>
+
 <script type="module">
-  console.log("huhu");
-    import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
+  import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
+  const video = document.getElementById('qr-video');
+  const resultEl = document.getElementById('result');
 
-    const video = document.getElementById('qr-video');
-    const resultEl = document.getElementById('result');
-
-    // Créer le scanner
-    const scanner = new QrScanner(
-      video, result => {
-        const url = result.data;
-        if (url.startsWith("https://blanzat-raconte.github.io/audio/")){
+  // Créer le scanner
+  const scanner = new QrScanner(
+    video, result => {
+      const url = result.data;
+      if (url.startsWith("https://blanzat-raconte.github.io/audio/")){
 //             console.log("go", url);
 //             resultEl.textContent = url;
-            launch(url, 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
-        }
-      },
-      {
-        preferredCamera: 'environment', // caméra arrière sur mobile
+          launch(url, 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
       }
-    );
+    },
+    {
+      preferredCamera: 'environment', // caméra arrière sur mobile
+    }
+  );
 
     // Vérifie qu'une caméra existe avant de démarrer
     QrScanner.hasCamera().then(hasCamera => {
       if (hasCamera) {
         scanner.start();
       } else {
-        resultEl.textContent = "Aucune caméra détectée.";
+        document.querySelector('#status').textContent = "Aucune caméra détectée. Il faut une caméra pour prendre les QR-codes en photo.";
       }
     });
-  </script>
+
+</script>
 
 
 
