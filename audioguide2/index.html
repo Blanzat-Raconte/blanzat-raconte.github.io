@@ -451,13 +451,17 @@ window.addEventListener('error', function(error) {
 </script>
 
 <script type="module">
+  import {nfcDict} from "./nfcDict.js";
+  import {audioDict} from "./audioDict.js";
+  window.nfcDict = nfcDict;
+  window.audioDict = audioDict;
+</script>
+
+<script>
 log = ChromeSamples.log;
 if (!("NDEFReader" in window)){
   ChromeSamples.setStatus("Cette page ne fonctionnera pas. Il faut utiliser le navigateur Chrome sur un téléphone Android pour que cela fonctionne.");
   }
-
-  import {nfcDict} from "./nfcDict.js";
-  import {audioDict} from "./audioDict.js";
   // console.log(audioDict);
   const preUrl = "https://blanzat-raconte.github.io/audio/";
 
