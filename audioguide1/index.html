@@ -350,7 +350,7 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
   function launch(audioFile, title, imageUrl, imageAlt) {
     // Si même fichier ou temps de lecture < 3 secondes
     if (audioFile == url && isPlaying && audio.currentTime < 3)
-        return;
+      return;
 
     // Backup du nom de l'audio
     url = audioFile;

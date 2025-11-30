@@ -344,7 +344,7 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
   function launch(audioFile, title, imageUrl, imageAlt) {
     // Si même fichier ou temps de lecture < 3 secondes
     if (audioFile == url && isPlaying && audio.currentTime < 3)
-        return;
+      return;
 
     // Backup du nom de l'audio
     url = audioFile;
@@ -357,6 +357,8 @@ Les sons durent moins de 1 minute (entre 15 secondes et 45 secondes).
 
     // Crée un nouvel objet Audio
     audio = new Audio(audioFile);
+    audio.play();
+    audio.pause();
     audio.play();
     isPlaying = true;
 
@@ -466,23 +468,23 @@ if (!("NDEFReader" in window)){
   const preUrl = "https://blanzat-raconte.github.io/audio/";
 
 async function startScan() {
-  log("starting scan");
+  // log("starting scan");
 
   try {
     const ndef = new NDEFReader();
     await ndef.scan();
-    log("> Scan started");
+    // log("> Scan started");
 
     ndef.addEventListener("readingerror", () => {
-      log("Argh! Cannot read data from the NFC tag. Try another one?");
+      log("Erreur de lecture du tag NFC.");
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-      log(`> Serial Number: ${serialNumber}`);
+      // log(`> Tag: ${serialNumber}`);
       // log(`> Records: (${message.records.length})`);
       const audioId = nfcDict[serialNumber];
       const audioUrl = preUrl + audioId + ".mp3"
-      log (`> Id: ${audioId}`);
+      // log (`> Id: ${audioId}`);
       launch(audioUrl, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
     });
   } catch (error) {
