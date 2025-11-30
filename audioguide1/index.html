@@ -449,14 +449,19 @@ checkCameraPermission();
   const video = document.getElementById('qr-video');
   const resultEl = document.getElementById('result');
 
+  import {audioDict} from "./audioDict.js";
+  // console.log(audioDict);
+  const preUrl = "https://blanzat-raconte.github.io/audio/";
+
   // Créer le scanner
   const scanner = new QrScanner(
     video, result => {
       const url = result.data;
-      if (url.startsWith("https://blanzat-raconte.github.io/audio/")){
+      if (url.startsWith(preUrl)){
 //             console.log("go", url);
 //             resultEl.textContent = url;
-          launch(url, 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
+          const audioId = [url.slice(preUrl,-4)];
+          launch(url, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
       }
     },
     {

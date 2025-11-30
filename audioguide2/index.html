@@ -450,11 +450,16 @@ window.addEventListener('error', function(error) {
 });
 </script>
 
-<script>
+<script type="module">
 log = ChromeSamples.log;
 if (!("NDEFReader" in window)){
   ChromeSamples.setStatus("Cette page ne fonctionnera pas. Il faut utiliser le navigateur Chrome sur un téléphone Android pour que cela fonctionne.");
   }
+
+  import {nfcDict} from "./nfcDict.js";
+  import {audioDict} from "./audioDict.js";
+  // console.log(audioDict);
+  const preUrl = "https://blanzat-raconte.github.io/audio/";
 
 async function startScan() {
   log("starting scan");
@@ -469,12 +474,10 @@ async function startScan() {
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-      log(`> Serial Number: ${serialNumber}`);
-      log(`> Records: (${message.records.length})`);
-      if (serialNumber == 'f2:09:52:73')
-        launch('https://blanzat-raconte.github.io/audio/0.mp3', 'Angélique', 'https://blanzat-raconte.github.io/assets/img/bonbons.png', 'grande fleur');
-      if (serialNumber == '54:5c:aa:89')
-        launch('https://blanzat-raconte.github.io/audio/11.mp3', 'Réglisse et Agastache', 'https://blanzat-raconte.github.io/assets/img/pates_de_fruits.png', 'petite fleur');
+      // log(`> Serial Number: ${serialNumber}`);
+      // log(`> Records: (${message.records.length})`);
+      const audioId = nfcDict[serialNumber];
+      launch(audioDict[audioId].audioUrl, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
     });
   } catch (error) {
     log("Argh! " + error);
