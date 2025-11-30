@@ -458,10 +458,12 @@ checkCameraPermission();
     video, result => {
       const url = result.data;
       if (url.startsWith(preUrl)){
-//             console.log("go", url);
-//             resultEl.textContent = url;
-          const audioId = [url.slice(preUrl,-4)];
-          launch(url, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
+        console.log("url", url);
+        // resultEl.textContent = url;
+        const audioId = url.slice(preUrl.length,-4);
+        console.log("id", audioId);
+        resultEl.textContent = url;
+        launch(url, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
       }
     },
     {
