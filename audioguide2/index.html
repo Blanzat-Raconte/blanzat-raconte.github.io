@@ -478,10 +478,12 @@ async function startScan() {
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-      // log(`> Serial Number: ${serialNumber}`);
+      log(`> Serial Number: ${serialNumber}`);
       // log(`> Records: (${message.records.length})`);
       const audioId = nfcDict[serialNumber];
-      launch(audioDict[audioId].audioUrl, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
+      const audioUrl = preUrl + audioId + ".mp3"
+      log (`> Id: ${audioId}`);
+      launch(audioUrl, audioDict[audioId].name, audioDict[audioId].imgSrc, audioDict[audioId].imgAlt);
     });
   } catch (error) {
     log("Argh! " + error);
