@@ -116,3 +116,7 @@ p a, .md-content li a{
   position: relative;
   bottom: -20px;
 }
+
+
+footer{
+ display: none;}
