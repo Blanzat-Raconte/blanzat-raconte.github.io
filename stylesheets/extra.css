@@ -44,13 +44,44 @@ h1{
 }
 
 .md-nav__link{
-padding: 2px;
+padding: 5px;
+/* outline */
+border-bottom: 2px solid black;
+
+border-radius: 5px;
+font-size: medium;
+/* background-color: #d5ebd1; */
 }
+
+.md-nav__link:hover{
+  border-bottom: 2px solid black;
+  background-color: #d5ebd1;
+  }
+
 .md-nav__link.md-nav__link--passed.md-nav__link--active,
 .md-nav__link.md-nav__link--active{
-    background-color: #C8DAF0;
-    color: black;
+  background-color: #C8DAF0;
+  color: black;
 }
+
+.md-nav {
+  /* background-color: #c9ffc1; */
+  /* border-radius: 5px; */
+  padding: 5px 15px 10px 15px;
+  width: fit-content;
+  min-width: 20%;
+  /* flex:2; */
+
+}
+.md-container{display: flex;flex-flow:row;}
+
+@media screen and (max-width: 76.234375em) {
+  /* .md-nav {
+    background-color: #9EE433;
+  } */
+  .md-container{flex-flow: column;}
+}
+
 
 p a, .md-content li a{
     padding: 5px;
@@ -119,4 +150,10 @@ p a, .md-content li a{
   margin-right: 10px;
   position: relative;
   bottom: -20px;
+}
+
+
+.md-main__inner {
+  display: grid;
+  font-size: medium;
 }
