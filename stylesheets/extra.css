@@ -75,6 +75,10 @@ p a, .md-content li a{
   height: 4rem;
 }
 
+.img-w600 img{
+  width: 600px;
+}
+
 .lsf{
   line-height: 40px;
 }
@@ -116,7 +120,3 @@ p a, .md-content li a{
   position: relative;
   bottom: -20px;
 }
-
-
-footer{
- display: none;}
